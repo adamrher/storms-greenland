@@ -27,63 +27,34 @@ begin
 
   subdir_scrip = "../data/precip/"
 
-  fname0 = (/"geolines_PRECT_amean_95ptile_f19.nc", \
-            "geolines_PRECT_amean_95ptile_f09.nc", \
-            "geolines_PRECT_amean_95ptile_ne30pg2.nc", \
-            "geolines_PRECT_amean_95ptile_ne30pg3.nc", \
-            "geolines_PRECT_amean_95ptile_ARCTIC.nc", \
-            "geolines_PRECT_amean_95ptile_ARCTICGRIS.nc", \
-            "geolines_PRECT_amean_95ptile_ERA5.nc", \
-            "geolines_PRECT_amean_95ptile_MERRA2.nc"/)
-  fname0 = (/"geolines_PRECT_amean_99ptile_pm1day_f19.nc", \
-	     "geolines_PRECT_amean_99ptile_pm1day_f09.nc", \
-             "geolines_PRECT_amean_99ptile_pm1day_ne30pg2.nc", \
-             "geolines_PRECT_amean_99ptile_pm1day_ne30pg3.nc", \
-             "geolines_PRECT_amean_99ptile_pm1day_ARCTIC.nc", \
-             "geolines_PRECT_amean_99ptile_pm1day_ARCTICGRIS.nc", \
-             "geolines_PRECT_amean_99ptile_pm1day_ERA5.nc", \
-             "geolines_PRECT_amean_99ptile_pm1day_MERRA2.nc"/)
-
+  ;;fname0 = (/"geolines_PRECT_amean_99ptile_pm1day_MERRA2.nc", \
+  ;;           "geolines_PRECT_amean_99ptile_pm1day_ERA5.nc"/)
+  fname0 = (/"geolines_PRECT_amean_95ptile_MERRA2.nc", \
+             "geolines_PRECT_amean_95ptile_ERA5.nc"/)
 
   dir = "/glade/campaign/cgd/amp/aherring/archive/"
   rdir = "/atm/hist/"
-  fname = (/"cam6_2_022.se_FHIST_f19_f19_mg17_900pes_200506_mg3-Nx5yrs", \
-	    "cam6_2_022.se_FHIST_f09_f09_mg17_1800pes_200507_mg3-Nx5yrs", \
-	    "cam6_2_022.se_FHIST_ne30pg2_ne30pg2_mg17_1800pes_200507_mg3-Nx5yrs", \
-	    "cam6_2_022.se_FHIST_ne30pg3_ne30pg3_mg17_1800pes_200507_mg3-Nx5yrs", \
-	    "cam6_2_022.se_FHIST_ne0np4.ARCTIC.ne30x4_mt12_7680pes_200507_mg3-Nx2yrs", \
-	    "cam6_2_022.se_FHIST_ne0np4.ARCTICGRIS.ne30x8_mt12_7680pes_200510_mg3-Nx1yrs"/)
-;;	    "ERA5", \
-;;	    "MERRA2"/)
+  fname = (/"MERRA2", \
+	    "ERA5"/)
   fdate = ".cam.h3.*"
 
-  nera5 = 6
+  nera5 = 1
   era5dir = "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ERA5_raw/"
-  nmerra2 = 7
+  nmerra2 = 0
   merra2dir = "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/merra2_precip/"
 
-  sdir = (/"/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ESMF/SB/f19/", \
-           "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ESMF/SB/ne30pg2/", \
-           "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/TempestRemap/SB/f19/", \
-           "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/TempestRemap/SB/ne30pg2/"/)
+  sdir_era5 = (/"/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ERA5_SB/ESMF_f19/", \
+           "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ERA5_SB/ESMF_ne30pg2/", \
+           "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ERA5_SB/TR_f19/", \
+           "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/ERA5_SB/TR_ne30pg2/"/)
 
-  runnam  = (/"f19", \
-              "f09", \
-              "ne30pg2", \
-              "ne30pg3", \
-              "ARCTIC", \
-              "ARCTICGRIS", \
-	      "ERA5", \
-	      "MERRA2"/)
+  sdir_merra2 = (/"/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/merra2_SB/ESMF_f19/", \
+	   "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/merra2_SB/ESMF_ne30pg2/", \
+	   "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/merra2_SB/TR_f19/", \
+	   "/glade/campaign/cgd/amp/aherring/annelise_backup/TempestExtremes/merra2_SB/TR_ne30pg2/"/)
 
-  runnam  = (/"LL_2~S~o~N~", \
-              "LL_1~S~o~N~", \
-              "QU_1.5~S~o~N~", \
-              "QU_1~S~o~N~", \
-              "VR_0.25~S~o~N~", \
-              "VR_0.125~S~o~N~", \
-              "ERA5", \
-              "MERRA2"/)
+  runnam  = (/"MERRA2", \
+  	      "ERA5"/)
 
   nfiles = dimsizes(fname)
 
@@ -99,30 +70,19 @@ begin
 
   cellfill = True
 
-  griddir = (/"/glade/work/aherring/grids/uniform-res/f19/grids/", \
-              "/glade/work/aherring/grids/uniform-res/f09/grids/", \
-              "/glade/work/aherring/grids/uniform-res/ne30np4.pg2/grids/", \
-              "/glade/work/aherring/grids/uniform-res/ne30np4.pg3/grids/", \
-              "/glade/work/aherring/grids/var-res/ne0np4.ARCTIC.ne30x4/grids/", \
-              "/glade/work/aherring/grids/var-res/ne0np4.ARCTICGRIS.ne30x8/grids/", \
-	      "/glade/work/aherring/grids/SCRIP_files/", \
+  griddir = (/"/glade/work/aherring/grids/SCRIP_files/", \
               "/glade/work/aherring/grids/SCRIP_files/"/)
 
-  scrip = (/"fv1.9x2.5_141008.nc", \
-            "fv0.9x1.25_scrip_141008.nc", \
-            "ne30pg2_scrip_170608.nc", \
-            "ne30pg3_scrip_170611.nc", \
-            "ne0ARCTICne30x4_scrip_191212.nc", \
-            "ne0ARCTICGRISne30x8_scrip_191209.nc", \
-	    "ERA5_025_221025.nc", \
-	    "MERRA2_scrip.nc"/)
+  scrip = (/"MERRA2_scrip.nc", \
+  	    "ERA5_025_221025.nc"/)
 
 ;******************************************************
 ; load dates?
 ;******************************************************
 
-  tmppath = "/glade/campaign/cgd/amp/aherring/archive/cam6_2_022.se_FHIST_f19_f19_mg17_900pes_200506_mg3-Nx5yrs/atm/hist/cam6_2_022.se_FHIST_f19_f19_mg17_900pes_200506_mg3-Nx5yrs.cam.h3.*"
-   
+;  tmppath = "/glade/campaign/cgd/amp/aherring/archive/cam6_2_022.se_FHIST_f19_f19_mg17_900pes_200506_mg3-Nx5yrs/atm/hist/cam6_2_022.se_FHIST_f19_f19_mg17_900pes_200506_mg3-Nx5yrs.cam.h3.*"
+;
+;  print("loading dates...")   
 ;  sfiles = systemfunc ("ls " + tmppath)
 ;  f = addfiles (sfiles,"r")
 ;  ListSetType(f,"cat")
@@ -130,6 +90,19 @@ begin
 ;
 ;  dates = f[:]->date
 ;  delete(f)
+;
+;  fname_out = "dates.nc"
+;  system("/bin/rm -f " + fname_out)
+;  print("creating " + fname_out)
+;  ncdf = addfile(fname_out,"c")
+;  ncdf->dates = dates
+;  delete(ncdf)
+
+  fname_in = "dates.nc"
+  print("loading " + fname_in)
+  ncdf = addfile(fname_in,"r")
+  dates = ncdf->dates
+  delete(ncdf)
 
 ;******************************************************
 ; create plot
@@ -225,17 +198,15 @@ begin
  nens = 4
  myblobtc = new( (/nens,nfiles/), "integer" )
 
- ;;myblobtc(:,0) = (/17521,12786,3589,3934/)
- myblobtc(:,0) = (/17521,12786,3589,14079/)
- ;;myblobtc(:,1) = (/18706,26991,20008,12686/)
- myblobtc(:,1) = (/2035,26991,20008,12686/)
- myblobtc(:,2) = (/16135,21269,27244,1138/)
- myblobtc(:,3) = (/7479,25889,4256,6010/)
- ;;myblobtc(:,4) = (/28483,5177,17032,28953/)
- myblobtc(:,4) = (/28483,5177,22996,28953/)
- ;;myblobtc(:,5) = (/15542,44,24477,21693/)
- ;;myblobtc(:,5) = (/15542,44,24477,15875/)
- myblobtc(:,5) = (/15542,44,9151,15875/)
+; myblobtc(:,0) = (/17521,12786,3589,14079/)
+; myblobtc(:,1) = (/2035,26991,20008,12686/)
+; myblobtc(:,2) = (/16135,21269,27244,1138/)
+; myblobtc(:,3) = (/7479,25889,4256,6010/)
+; myblobtc(:,4) = (/28483,5177,22996,28953/)
+; myblobtc(:,5) = (/15542,44,9151,15875/)
+
+ myblobtc(:,0) = (/27544,7242,9317,28442/) ;;(/31,7242,14423,28442/)
+ myblobtc(:,1) = (/17138,23460,15710,17124/) ;;(/2423,15710,23460,17124/) 
 
  do n = 0,nfiles-1
 
@@ -250,27 +221,21 @@ begin
 
    print("load:"+subdir_scrip+fname0(n))
    f = addfile(subdir_scrip + fname0(n),"r")
-   ;;var2 = f->av
-   ;;xp2 = f->xp
-   ;;yp2 = f->yp
    blobid = f->blobid
-   ;;blobtc = f->blobtc
-
-;if (n.lt.nfiles-2) then
-;   myblobtc(:,n) = blobtc(:,kframe)
-;end if
-;print("blobid: " + blobid(:,kframe))
-;print("blobtc: " + blobtc(:,kframe))
+   blobtc = f->blobtc
    delete(f)
 
-;   do p=0,3
-;     labels((n*4)+p) = tostring(dates(blobtc(p,kframe)))
-;   end do
+   do p=0,3
+     ;;labels((n*4)+p) = tostring(dates(blobtc(p,kframe)))
+     ;;labels((n*4)+p) = tostring(dates(myblobtc(p,n)))
+   end do
 
    if (era5data) then
      files = systemfunc ("ls " + era5dir + "*.nc")
+     psfiles = systemfunc ("ls " + "/glade/campaign/cgd/amp/aherring/annelise_backup/adams_folder/ERA5_psl/first/consistent_order/*")
    else if (merra2data) then
      files = systemfunc ("ls " + merra2dir + "*.nc")
+     psfiles = systemfunc ("ls " + "/glade/campaign/cgd/amp/aherring/annelise_backup/MERRA2/annual/*.nc")
    else
      files = systemfunc ("ls " + dir + fname(n) + rdir + fname(n) + fdate)
    end if
@@ -304,10 +269,10 @@ begin
     dtime = dims(tind)
     delete([/dims,dimnames/])
 
+    print("load psfile: " + psfiles(m))    
+    pf = addfile(psfiles(m),"r")
+
     if (m.eq.0) then
-      ;;dims = dimsizes(blobtc)
-      ;;nens = dims(0)
-      ;;delete(dims)
 
       if (era5data) then
         vars = f->PRECT(0:nens-1,:,:)
@@ -329,23 +294,33 @@ begin
     do p = 0,nens-1
       ;;if ( (blobtc(p,kframe) .ge. ntime) .and. (blobtc(p,kframe) .lt. (ntime+dtime)) )
       ;;print("blobtc(p,kframe): " + blobtc(p,kframe) + " ntime: " + ntime + " ntime+dtime: " + (ntime+dtime)) 
+;;print(mybsobtc(p,n))
+;;print("p="+p)
+;;print(ntime+dtime)
+;;exit
       if ( (myblobtc(p,n) .ge. ntime) .and. (myblobtc(p,n) .lt. (ntime+dtime)) )
       print("myblobtc(p,n): " + myblobtc(p,n) + " ntime: " + ntime + " ntime+dtime: " + (ntime+dtime))
-        dates = f->date
+        ;;dates = f->date
         ;;time = f->time
+
         ;;newtc= blobtc(p,kframe)-ntime
         newtc= myblobtc(p,n)-ntime
+
         ;;print("date: " + dates(newtc))
         ;;print("day: "  + time(newtc))
 
-        labels((n*nens)+p) = tostring(dates(newtc))
+        ;;labels((n*nens)+p) = tostring(dates(newtc))
         ;;delete([/dates,time/])
-        delete(dates)
+        ;;delete(dates)
 
         if (era5data) then
           vars(p,:,:) = f->PRECT(newtc,:,:)
+          tmp = short2flt(pf->msl)
+          vars2(p,:,:) = tmp(newtc,:,:)
+          delete(tmp)
         else if (merra2data) then
           vars(p,:,:) = f->PRECTOT(newtc,:,:) ;;PRECTOTCORR
+          vars2(p,:,:) = pf->PS(newtc,:,:)
         else
           if (latlon) then
             vars(p,:,:) = f->PRECC(newtc,:,:)
@@ -366,7 +341,15 @@ begin
         end if
 
         ;;get blobs
-        gfiles = systemfunc ("ls " + sdir(p) + fname(n) + "/" + "*.stitch.nc")
+        if (era5data) then
+          gfiles = systemfunc ("ls " + sdir_era5(p) + "/" + "*.stitch.nc")
+        else if (merra2data) then
+          gfiles = systemfunc ("ls " + sdir_merra2(p) + "/" + "*.stitch.nc")
+        else
+          print("Not reanalysis. Exiting.")
+          exit
+        end if
+        end if
         print("load:"+gfiles(m))
         gf = addfile(gfiles(m),"r")
         delete(gfiles)
@@ -408,7 +391,11 @@ begin
     ntime = ntime + dtime
 
     if (writencdf) then
-      psl = f->PSL
+      if (merra2data) then
+        psl = pf->PS
+      else
+        psl = short2flt(pf->msl)
+      end if
       tmp = dim_avg_n(psl,0)
       tmp@_FillValue = default_fillvalue("float")
       delete(psl)
@@ -434,7 +421,7 @@ begin
       sumsN = sumsN + where(.not.ismissing(tmp),1.0,0.0)
       delete(tmp)
     end if
-
+    delete(pf)
     delete(f)
 
     if (.not.writencdf) then
@@ -463,9 +450,9 @@ begin
 
      fname_out = fname(n)+".climo.psl.nc"
 
-     system("/bin/rm -f data/climo/" +fname_out)
-     print("creating data/climo/" + fname_out)
-     ncdf = addfile("data/climo/"+fname_out,"c")
+     system("/bin/rm -f ../data/climo/" +fname_out)
+     print("creating ../data/climo/" + fname_out)
+     ncdf = addfile("../data/climo/"+fname_out,"c")
 
      ncdf->bar = bar
      delete(ncdf)
@@ -486,6 +473,11 @@ begin
      vars!2 = "lon"
      vars&lon = lon
      vars&lon@units = "degrees_east"
+
+   print("max vars2: " + max(vars2))
+   print("min vars2: " + min(vars2))
+   print("max bar: " + max(bar))
+   print("min bar: " + min(bar))
 
      ;;remove climo
      do p = 0,3
@@ -588,6 +580,7 @@ begin
 
    delete(vars2@long_name)
    delete(vars2@units)
+   delete(vars2@standard_name)
 
    do p = 0,nens-1
     
@@ -611,7 +604,10 @@ begin
    end do
    delete(vars)
    delete(vars2)
-   
+  
+   delete(vars3p1@long_name)
+   delete(vars3p1@units)
+ 
    ;;blobs
    pid = n*nens + 0
    tmp = gsn_csm_contour(wks,vars3p1,resp1)
@@ -668,7 +664,7 @@ begin
   resP@lbLabelFontHeightF         = 0.01
   resP@pmLabelBarOrthogonalPosF   = -0.025
 
-  ;;resP@gsnPanelTop     = 0.95
+  resP@gsnPanelTop     = 0.95
   resP@gsnPanelBottom     = 0.05
 
   gsn_panel(wks,plot,(/nfiles,4/),resP)               ; now draw as one plot
